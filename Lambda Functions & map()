@@ -1,0 +1,112 @@
+"""
+Day 3 Practice — Lambda Functions & map() — Extra Problems
+Data Engineering 30-Day Prep
+
+These build on your existing lambda_and_map.py work.
+Push this file to: data-engineer-portfolio/day03/lambda_and_map_extra_practice.py
+"""
+
+# ----------------------------------------------------------------------
+# Problem 1: Use lambda to check if a number is positive, negative, or zero
+# ----------------------------------------------------------------------
+check_sign = lambda x: "POSITIVE" if x > 0 else ("NEGATIVE" if x < 0 else "ZERO")
+print(check_sign(5))    # POSITIVE
+print(check_sign(-3))   # NEGATIVE
+print(check_sign(0))    # ZERO
+
+
+# ----------------------------------------------------------------------
+# Problem 2: Use map() to convert a list of Celsius temperatures to Fahrenheit
+# ----------------------------------------------------------------------
+celsius = [0, 20, 37, 100]
+fahrenheit = list(map(lambda c: (c * 9/5) + 32, celsius))
+print(fahrenheit)
+# Output: [32.0, 68.0, 98.6, 212.0]
+
+
+# ----------------------------------------------------------------------
+# Problem 3: Use map() with two lists at once (add corresponding elements)
+# ----------------------------------------------------------------------
+list1 = [1, 2, 3]
+list2 = [10, 20, 30]
+summed = list(map(lambda a, b: a + b, list1, list2))
+print(summed)
+# Output: [11, 22, 33]
+
+
+# ----------------------------------------------------------------------
+# Problem 4: Use map() to strip whitespace and capitalize a list of names
+# ----------------------------------------------------------------------
+names = ["  ravi", "SANA  ", "  amit  "]
+cleaned = list(map(lambda n: n.strip().capitalize(), names))
+print(cleaned)
+# Output: ['Ravi', 'Sana', 'Amit']
+
+
+# ----------------------------------------------------------------------
+# Problem 5: Use map() to extract the length of each word in a sentence
+# ----------------------------------------------------------------------
+sentence = "data engineering is fun"
+word_lengths = list(map(lambda word: len(word), sentence.split()))
+print(word_lengths)
+# Output: [4, 12, 2, 3]
+
+
+# ----------------------------------------------------------------------
+# Problem 6: Use map() to convert a list of dicts, extracting just one field
+# (very common DE pattern — pulling one column-like field from raw records)
+# ----------------------------------------------------------------------
+records = [
+    {"id": 1, "name": "Ravi", "salary": 50000},
+    {"id": 2, "name": "Sana", "salary": 60000},
+    {"id": 3, "name": "Amit", "salary": 55000},
+]
+names_only = list(map(lambda r: r["name"], records))
+print(names_only)
+# Output: ['Ravi', 'Sana', 'Amit']
+
+
+# ----------------------------------------------------------------------
+# Problem 7: Use map() + lambda to apply a 10% raise to each salary in records
+# ----------------------------------------------------------------------
+raised_salaries = list(map(lambda r: {"name": r["name"], "new_salary": r["salary"] * 1.10}, records))
+print(raised_salaries)
+# Output: [{'name': 'Ravi', 'new_salary': 55000.0}, {'name': 'Sana', 'new_salary': 66000.0}, {'name': 'Amit', 'new_salary': 60500.0}]
+
+
+# ----------------------------------------------------------------------
+# Problem 8: Use map() to convert a list of string numbers into integers,
+# then find the sum (common when reading raw CSV data — everything is a string)
+# ----------------------------------------------------------------------
+raw_values = ["10", "20", "30", "40"]
+total = sum(map(lambda x: int(x), raw_values))
+print(total)
+# Output: 100
+
+
+# ----------------------------------------------------------------------
+# Problem 9: Use lambda inside map() to tag numbers as "EVEN" or "ODD"
+# and return a dict of number -> tag
+# ----------------------------------------------------------------------
+numbers = [1, 2, 3, 4, 5]
+tagged = dict(map(lambda n: (n, "EVEN" if n % 2 == 0 else "ODD"), numbers))
+print(tagged)
+# Output: {1: 'ODD', 2: 'EVEN', 3: 'ODD', 4: 'EVEN', 5: 'ODD'}
+
+
+# ----------------------------------------------------------------------
+# Problem 10: Use map() to mask part of an email address (data privacy pattern)
+# e.g. "ravi.kumar@example.com" -> "r*******r@example.com"
+# ----------------------------------------------------------------------
+def mask_email(email):
+    local, domain = email.split("@")
+    if len(local) <= 2:
+        masked_local = local[0] + "*"
+    else:
+        masked_local = local[0] + "*" * (len(local) - 2) + local[-1]
+    return masked_local + "@" + domain
+
+emails = ["ravi.kumar@example.com", "sana@test.com", "amit.singh@company.io"]
+masked = list(map(lambda e: mask_email(e), emails))
+print(masked)
+# Output: ['r*********r@example.com', 's**a@test.com', 'a********h@company.io']
