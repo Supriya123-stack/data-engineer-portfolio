@@ -18,7 +18,7 @@ Built from the ground up as a fresher preparing for Data Engineer roles — this
 |-----|-------|-------|----------|
 | 1 | Python Core (data types, control flow, comprehensions) | [Notes](day01/day01_notes.md) | [Practice](day01/day01_practice.py) |
 | 2 | Functions, File Handling, Exception Handling, OOP | [Notes](day02_notes.md) | [Practice](day02_practice.py) |
-| 3 | Lambda functions & map() | — | [Practice](day03/lambda_and_map_practice.py) |
+| 3 | Lambda functions & map() | — | [Practice](day03/lambda_and_map.py) |
 
 *(This table will grow daily — each row links to that day's notes and code.)*
 
